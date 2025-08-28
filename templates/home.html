@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title  %}ATS | Home{% endblock %}
+{% block content %}
+<section class="bg-white py-8 antialiased dark:bg-gray-900 md:py-16">
+  <div class="space-y-6 sm:space-y-8">
+          <ol class="flex flex-col gap-4 rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800 sm:justify-center md:flex-row md:items-center lg:gap-6">
+            <li class="flex items-center gap-2 md:flex-1 md:flex-col md:gap-1.5 lg:flex-none">
+              <svg class="h-7 w-7 text-blue-700 dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.5 11.5 11 14l4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+              </svg>
+              <p class="text-xl font-medium leading-tight text-blue-700 dark:text-blue-500">Upload Resume</p>
+            </li>
+
+                      <!-- Divider Left -->
+            <div class="hidden h-px w-8 shrink-0 bg-gray-400 md:block xl:w-16"></div>
+
+            <!-- Step Item -->
+            <li id="analysisStep"
+                class="cursor-pointer flex items-center gap-2 md:flex-1 md:flex-col md:gap-1.5 lg:flex-none">
+              <svg class="h-7 w-7 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                  width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M8.5 11.5 11 14l4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+              </svg>
+              <p class="text-xl font-medium leading-tight text-gray-400">Analysis</p>
+            </li>
+
+            <!-- Divider Right -->
+            <div class="hidden h-px w-8 shrink-0 bg-gray-400 md:block xl:w-16"></div>
+
+            <li class="flex items-center gap-2 md:flex-1 md:flex-col md:gap-1.5 lg:flex-none">
+              <svg class="h-7 w-7 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.5 11.5 11 14l4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+              </svg>
+              <p class="text-xl font-medium leading-tight text-gray-500 dark:text-gray-400">Results</p>
+            </li>
+
+          </ol>
+        </div>
+      <div class="mx-auto max-w-screen-xl px-4 2xl:px-0 mt-5">
+        <form method="post" action="{% url "ats:home" %}" enctype="multipart/form-data" >
+          {% csrf_token %}
+          <div class="mt-6 sm:mt-8 lg:flex lg:gap-8">
+            
+            <div class="mt-6 grow sm:mt-8 lg:mt-0">
+              <div class="space-y-4 rounded-lg border border-gray-200 p-4 shadow-sm dark:border-gray-700 ">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-blue-600 mt-2 text-center border p-3 rounded-xl ">Job Description</h3>
+                
+                <div class="mt-8 rounded-lg bg-blue-50  text-sm text-blue-800 dark:bg-gray-800 dark:text-blue-400 sm:text-base" role="alert">
+                    <textarea type="file"  name="job_description" rows="15" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Job Description..." required></textarea>
+
+                </div>
+              </div>
+            </div>
+            <div class="w-full divide-y divide-gray-200 overflow-hidden rounded-lg border border-gray-200 dark:divide-gray-700 dark:border-gray-700 lg:max-w-xl xl:max-w-2xl">
+              <div class="space-y-4 p-6">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-blue-600  mb-7 text-center border p-3 rounded-xl">Your Resume</h3>
+                      
+                <div class="max-w-lg mx-auto">
+                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="user_avatar">Upload file</label>
+                  <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="resume_help" name="resume" type="file" required>
+                  <div class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="user_avatar_help">Upload your resume (PDF or DOCX)</div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="gap-4 sm:flex items-center mt-8">
+            <button id="submitBtn" type="submit" class="mt-4 flex w-1/2  mx-auto items-center justify-center rounded-lg bg-blue-700  px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 sm:mt-0">Submit</button>
+          </div>
+      </form>
+      </div>
+      <div id="loaderOverlay"
+        class="hidden fixed inset-0 bg-opacity-50 flex items-center justify-center z-50">
+        <div role="status text-center">
+          <svg aria-hidden="true"
+            class="w-16 h-16 text-gray-200 animate-spin dark:text-gray-600 fill-yellow-400"
+            viewBox="0 0 100 101" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M100 50.5908C100 78.2051 77.6142 
+                100.591 50 100.591C22.3858 100.591 
+                0 78.2051 0 50.5908C0 22.9766 
+                22.3858 0.59082 50 0.59082C77.6142 
+                0.59082 100 22.9766 100 
+                50.5908ZM9.08144 50.5908C9.08144 
+                73.1895 27.4013 91.5094 50 
+                91.5094C72.5987 91.5094 90.9186 
+                73.1895 90.9186 50.5908C90.9186 
+                27.9921 72.5987 9.67226 50 
+                9.67226C27.4013 9.67226 9.08144 
+                27.9921 9.08144 50.5908Z"
+              fill="currentColor" />
+            <path
+              d="M93.9676 39.0409C96.393 38.4038 
+                97.8624 35.9116 97.0079 
+                33.5539C95.2932 28.8227 92.871 
+                24.3692 89.8167 20.348C85.8452 
+                15.1192 80.8826 10.7238 75.2124 
+                7.41289C69.5422 4.10194 63.2754 
+                1.94025 56.7698 1.05124C51.7666 
+                0.367541 46.6976 0.446843 
+                41.7345 1.27873C39.2613 1.69328 
+                37.813 4.19778 38.4501 
+                6.62326C39.0873 9.04874 41.5694 
+                10.4717 44.0505 10.1071C47.8511 
+                9.54855 51.7191 9.52689 55.5402 
+                10.0491C60.8642 10.7766 65.9928 
+                12.5457 70.6331 15.2552C75.2735 
+                17.9648 79.3347 21.5619 82.5849 
+                25.841C84.9175 28.9121 86.7997 
+                32.2913 88.1811 35.8758C89.083 
+                38.2158 91.5421 39.6781 93.9676 
+                39.0409Z"
+              fill="currentFill" />
+          </svg>
+        </div>
+        {% comment %} <span class="text-yellow-400 text-2xl ml-3">Analysis...</span> {% endcomment %}
+      </div>
+
+</section>
+
+{% endblock %}
+{% block scripts %}
+<script>
+  const btn = document.getElementById("submitBtn");
+  const loaderOverlay = document.getElementById("loaderOverlay");
+  const step = document.getElementById("analysisStep");
+  const form = document.querySelector("form"); // assuming your button is inside <form>
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault(); // stop default submit first (we’ll decide later if we send)
+
+    // collect all required fields
+    const requiredFields = form.querySelectorAll("[required]");
+    let allFilled = true;
+
+    requiredFields.forEach(field => {
+      if (!field.value.trim()) {
+        allFilled = false;
+        field.classList.add("border-red-500"); // highlight empty field
+      } else {
+        field.classList.remove("border-red-500");
+      }
+    });
+
+    if (!allFilled) {
+      return; // ❌ stop submit if missing fields
+    }
+
+    // ✅ All fields filled → show loader & update step
+    loaderOverlay.classList.remove("hidden"); 
+    btn.disabled = true; 
+    btn.innerText = "Analysis...";
+
+    
+    // 🔹 Change button to yellow
+    btn.classList.remove("bg-blue-700", "hover:bg-blue-800", "dark:bg-blue-600", "dark:hover:bg-blue-700");
+    btn.classList.add("bg-yellow-800", "hover:bg-yellow-500", "text-black");
+
+    // Highlight step
+    const icon = step.querySelector("svg");
+    const text = step.querySelector("p");
+    const dividers = step.parentElement.querySelectorAll("div");
+
+    icon.classList.remove("text-gray-400");
+    icon.classList.add("text-blue-400");
+
+    text.classList.remove("text-gray-400");
+    text.classList.add("text-blue-400");
+
+    dividers.forEach(div => {
+      div.classList.remove("bg-gray-400");
+      div.classList.add("bg-blue-400");
+    });
+
+    form.submit();
+  });
+</script>
+
+{% endblock %}

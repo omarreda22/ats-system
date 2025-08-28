@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title  %}ATS | Analysis{% endblock %}
+{% block style %}
+
+
+<style>
+@keyframes border-move {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 400% 0%;
+  }
+}
+
+.moving-border-effect {
+  position: relative;
+  z-index: 0;
+}
+.moving-border-effect::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  border-radius: 0.5rem;
+  padding: 2px;
+  background: linear-gradient(90deg,
+    #0065F8,  /* Cyan */
+    #00FFDE,  /* Purple */
+    #0065F8   /* Loop back */
+  );
+  background-size: 300% 100%;
+  animation: border-move 5s linear infinite;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+}
+</style>
+
+<style>
+
+.animated-border {
+  position: relative;
+  z-index: 0;
+}
+
+.animated-border::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  border-radius: 0.5rem; /* rounded-lg */
+  padding: 2px;
+  background: linear-gradient(90deg, 
+    #22d3ee, #3b82f6, #8b5cf6, #ec4899, #22d3ee);
+  background-size: 400% 100%;
+  animation: border-move 4s linear infinite;
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+}
+</style>
+
+
+{% endblock %}
+{% block content %}
+
+<section class="bg-white py-8 antialiased dark:bg-gray-900 md:py-16">
+     <div class="space-y-6 sm:space-y-8">
+          <ol class="flex flex-col gap-4 rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800 sm:justify-center md:flex-row md:items-center lg:gap-6">
+            <li class="flex items-center gap-2 md:flex-1 md:flex-col md:gap-1.5 lg:flex-none">
+              <svg class="h-7 w-7 text-blue-700 dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.5 11.5 11 14l4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+              </svg>
+              <p class="text-xl font-medium leading-tight text-blue-700 dark:text-blue-500">Upload Resume</p>
+            </li>
+
+                      <!-- Divider Left -->
+            <div class="hidden h-px w-8 shrink-0 bg-blue-400 md:block xl:w-16"></div>
+
+            <!-- Step Item -->
+            <li id="analysisStep"
+                class="cursor-pointer flex items-center gap-2 md:flex-1 md:flex-col md:gap-1.5 lg:flex-none">
+              <svg class="h-7 w-7 text-blue-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                  width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M8.5 11.5 11 14l4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+              </svg>
+              <p class="text-xl font-medium leading-tight text-blue-700 dark:text-blue-500">Analysis</p>
+            </li>
+
+            <!-- Divider Right -->
+            <div class="hidden h-px w-8 shrink-0 bg-blue-400 md:block xl:w-16"></div>
+
+            <li class="flex items-center gap-2 md:flex-1 md:flex-col md:gap-1.5 lg:flex-none">
+              <svg class="h-7 w-7 text-blue-500 dark:text-blue-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.5 11.5 11 14l4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+              </svg>
+              <p class="text-xl font-medium leading-tight text-blue-700 dark:text-blue-500">Results</p>
+            </li>
+
+          </ol>
+        </div>
+  <div class="mx-auto max-w-screen-xl px-4 2xl:px-0 mt-5">
+   
+    <h2 class="mb-4 text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl md:mb-6">ATS Results</h2>
+    <div class="gap-8 lg:flex">
+      <!-- Sidenav -->
+      <aside id="sidebar" class=" h-full w-80 shrink-0 overflow-y-auto border border-gray-200 bg-white p-3 shadow-sm dark:border-gray-700 dark:bg-gray-800 lg:block lg:rounded-lg">
+        <button id="dropdownUserNameButton" data-dropdown-toggle="dropdownUserName1" type="button" class="dark:hover-bg-gray-700 mb-3 flex w-full items-center justify-between rounded-lg bg-white p-2 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700" type="button">
+        <div class="w-full animated-border flex items-center p-4 text-2xl text-cyan-800 border border-cyan-300 rounded-lg bg-cyan-50 dark:bg-gray-800 dark:text-cyan-400 dark:border-cyan-800" role="alert">
+            <div>
+            <span class="font-medium"> Match Percentage {{match_percentage}}%  </span>
+            </div>
+        </div>
+        </button>
+        
+        <div class="mb-4 w-full border-b border-gray-100  dark:border-gray-700">
+        </div>
+
+        <ul class="space-y-2 ">
+            <span class=" bg-yellow-100 text-yellow-800  text-xl font-semibold me-2 px-2.5 py-0.5 rounded-sm text-gray-900 dark:text-white sm:text-1xl  dark:bg-yellow-900 dark:text-yellow-300"> You Need to Learn:</span>
+            {% for skill in missing_keywords %}
+          <li class="mt-3">
+            <span href="#" class="group flex items-center rounded-lg text-base font-medium text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+              <span class="ml-3">{{ forloop.counter }}. {{skill}}</span>
+            </span>
+          </li>
+          {% endfor %}
+        </ul>
+      </aside>
+      <div class=" w-full lg:rounded-lg bg-white py-8 antialiased dark:bg-gray-900 md:py-16 border border-gray-200 p-4 shadow-sm dark:border-gray-700">
+        <div class="mx-auto max-w-screen-xl ">
+            <div class="mx-auto  space-y-6 sm:space-y-8">
+            
+
+            <span class="ml-5 text-xl font-semibold sm:text-2x bg-purple-100 text-purple-800  text-xl font-semibold me-2 px-2.5 py-0.5 rounded-sm text-gray-900 dark:text-white sm:text-1xl  dark:bg-purple-900 dark:text-purple-300">Overview:</span>
+            <div class="m-4 rounded-lg bg-gray-50 p-4 text-sm text-gray-800 dark:bg-gray-800 dark:text-white sm:text-base" role="alert">
+                {{final_thoughts}}
+            </div>
+            </div>
+
+
+            <div class="mb-8 w-full border-b border-gray-100  dark:border-gray-700">
+            </div>
+            
+            <div class="pl-5">
+            <span class="mt-10 text-xl font-semibold text-gray-900 dark:text-white sm:text-2x bg-green-100 text-green-800  text-xl font-semibold me-2 px-2.5 py-0.5 rounded-sm text-gray-900 dark:text-white sm:text-1xl  dark:bg-green-900 dark:text-green-300">Recommendations and tips:</span>
+
+
+            <ol class="relative border-s border-gray-200 dark:border-gray-700 mt-7">
+                
+
+                {% for r in recommendations%}
+                <li class="mb-10 ms-6">
+                <span class="absolute -start-2.5 flex h-5 w-5 items-center justify-center rounded-full bg-gray-100 ring-8 ring-white dark:bg-green-800 dark:ring-gray-900">
+                    <svg class="h-3 w-3 text-green-100 dark:text-green-100" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11.917 9.724 16.5 19 7.5" />
+                    </svg>
+                </span>
+                
+                <p class="mb-1.5 text-md  text-gray-900 dark:text-white">{{r}}</p>
+                </li>
+                {% endfor %}
+
+            </ol>
+                
+            </div>
+        </div>
+        </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}
+{% endblock %}
