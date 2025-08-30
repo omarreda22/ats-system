@@ -18,6 +18,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # APPs
     "ats",
+    "store",
+    "facebook",
+    "twitter",
 ]
 
 MIDDLEWARE = [
@@ -53,7 +56,15 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
-    }
+    },
+    "facebook_db": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "facebook.db.sqlite3",
+    },
+    "twitter_db": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "twitter.db.sqlite3",
+    },
 }
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -91,3 +102,9 @@ MEDIA_URL = "/mediafiles/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "mediafiles/")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+DATABASE_ROUTERS = [
+    # "core.routers.db_routers.Default_Router",
+    "core.routers.db_routers.FacebookRouter",
+    "core.routers.db_routers.TwitterRouter",
+]

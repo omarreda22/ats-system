@@ -64,6 +64,8 @@ def ats_home(request):
 
         # Extract recommendations
         recommendations = extract_recommendations(result)
+
+        # Context
         context = {
             "match_percentage": match_percentage,
             "missing_keywords": missing_keywords,
