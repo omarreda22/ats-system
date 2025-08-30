@@ -3,13 +3,18 @@
 
 ATS simplifies recruitment, With smarter search, AI-powered ranking, and seamless candidate management, ATS is transforming recruitment into a faster, more transparent, and candidate-friendly journey.
 
-### Home Page View (The user enters a job description and uploads a resume): 
+### 📌 Home Page View (The user enters a job description and uploads a resume): 
 ![APPLICATION TRACKING SYSTEM Home](https://github.com/omarreda22/ats-system/blob/main/core/static/images/one.PNG)
 
 
 
-### Results Page View (Match Percentage - Skills to Improve - Final Thoughts - Recommendations): 
+### 📌 Results Page View (Match Percentage - Skills to Improve - Final Thoughts - Recommendations): 
 ![APPLICATION TRACKING SYSTEM Results](https://github.com/omarreda22/ats-system/blob/main/core/static/images/two.PNG)
+
+### 📌 Video Demo:
+<p align="center">
+  <img align="center" src="https://github.com/omarreda22/ats-system/blob/main/core/static/images/ats.gif">
+</p>
 
 ## How it work <img src="https://media.giphy.com/media/mBYkXvLxkHZFmqBHIC/giphy.gif" width=50px height=40px> 
 The user enters a job description and uploads a resume.
