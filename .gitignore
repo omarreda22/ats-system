@@ -8,7 +8,11 @@
 __pycache__/
 local_settings.py
 db.sqlite3
+facebook.db.sqlite3
+twitter.db.sqlite3
 db.sqlite3-journal
+db.facebook-journal
+db.twitter-journal
 media
 /static/
 # ##
